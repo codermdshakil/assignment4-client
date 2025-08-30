@@ -356,7 +356,6 @@ const BooksShow: React.FC<BooksTableProps> = ({ books }) => {
                               </div>
                               <FormControl>
                                 <Switch
-                                  required={true}
                                   checked={!!field.value}
                                   onCheckedChange={field.onChange}
                                 />

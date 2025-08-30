@@ -5,14 +5,14 @@ import { BookOpen } from "lucide-react";
 import { useParams } from "react-router";
 
 const BookDetails = () => {
-  const { bookId } = useParams();
+ 
+  const { bookId } = useParams<{ bookId: string }>();
 
   // fetch book details
   const {
-    data: book,
+    data:book,
     isLoading,
-    isError,
-  } = useGetSingleBookQuery(bookId, {
+  } = useGetSingleBookQuery(bookId ?? "", {
     pollingInterval: 30000,
     refetchOnFocus: true,
     refetchOnReconnect: true,
@@ -23,12 +23,11 @@ const BookDetails = () => {
     return <p className="text-center text-gray-500">Loading book details...</p>;
   }
 
-  if (isError || !book?.data) {
-    return <p className="text-center text-red-500">Book not found.</p>;
-  }
 
-  const { title, author, genre, isbn, description, copies, available }: IBook =
-    book?.data;
+const { title, author, genre, isbn, description, copies, available } =
+  (book as any)?.data || ({} as IBook);
+
+  console.log(title, author, genre, isbn, description, copies, available, 'est');
 
   return (
     <div className="max-w-3xl h-screen mx-auto mt-10">

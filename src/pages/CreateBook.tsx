@@ -52,7 +52,7 @@ const BookSchema = z.object({
 type BookFormValues = z.infer<typeof BookSchema>;
 
 const CreateBook = () => {
-  const [createBook, { data, isLoading, isError }] = useCreateBookMutation();
+  const [createBook] = useCreateBookMutation();
 
   const form = useForm<BookFormValues>({
     defaultValues: {
@@ -69,6 +69,7 @@ const CreateBook = () => {
     const navigate = useNavigate();
 
   const onSubmit = async (values: BookFormValues) => {
+
     try {
       const payload: IBook = {
         ...values,
@@ -76,7 +77,8 @@ const CreateBook = () => {
         available: values.available ?? true,
       };
 
-      await createBook(payload);
+      const res = await createBook(payload);
+      console.log(res);
       toast.success("Created a new Book!!");
       navigate("/books")
 
