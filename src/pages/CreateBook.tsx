@@ -66,9 +66,10 @@ const CreateBook = () => {
     },
   });
 
-    const navigate = useNavigate();
+  const navigate = useNavigate();
 
   const onSubmit = async (values: BookFormValues) => {
+    console.log(values, "form sumitted");
 
     try {
       const payload: IBook = {
@@ -80,8 +81,7 @@ const CreateBook = () => {
       const res = await createBook(payload);
       console.log(res);
       toast.success("Created a new Book!!");
-      navigate("/books")
-
+      navigate("/books");
     } catch (err) {
       toast.error("Something want wrong!");
     }
@@ -191,6 +191,7 @@ const CreateBook = () => {
                         min={0}
                         step={1}
                         {...field}
+                        onChange={(e) => field.onChange(Number(e.target.value))} // convert string to number
                       />
                     </FormControl>
                     <FormMessage />
