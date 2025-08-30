@@ -27,7 +27,6 @@ const BookDetails = () => {
 const { title, author, genre, isbn, description, copies, available } =
   (book as any)?.data || ({} as IBook);
 
-  console.log(title, author, genre, isbn, description, copies, available, 'est');
 
   return (
     <div className="max-w-3xl h-screen mx-auto mt-10">

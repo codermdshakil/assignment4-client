@@ -73,7 +73,7 @@ const CreateBook = () => {
     try {
       const payload: IBook = {
         ...values,
-        copies: parseInt(values.copies) as number,
+        copies: Number(values.copies) as number,
         available: values.available ?? true,
       };
 

@@ -120,7 +120,7 @@ const BooksShow: React.FC<BooksTableProps> = ({ books }) => {
     try {
       // here call updatedBook baseApi functions
       await updateSingleBook({
-        bookId: book._id,
+        bookId: book._id || "",
         updatedData: book,
       }).unwrap();
 
@@ -384,7 +384,7 @@ const BooksShow: React.FC<BooksTableProps> = ({ books }) => {
                       size="sm"
                       className="cursor-pointer"
                       variant="ghost"
-                      onClick={() => setDeleteBookId(book._id)}>
+                      onClick={() => setDeleteBookId(book._id || null)}>
                       <Trash2 className="h-4 w-4 text-red-500" />
                     </Button>
                   </DialogTrigger>

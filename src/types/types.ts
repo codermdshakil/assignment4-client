@@ -30,3 +30,8 @@ export interface IBorrowSummary {
     isbn: string;
   };
 }
+
+
+export interface BorrowSummaryResponse {
+  data: IBorrowSummary[];
+}

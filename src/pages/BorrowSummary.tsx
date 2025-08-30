@@ -1,7 +1,24 @@
 import { useGetBorrowSummaryQuery } from "@/redux/api/baseApi";
 
+interface IBorrowSummary {
+  book: {
+    title: string;
+    isbn: string;
+  };
+  totalQuantity: number;
+}
+
+interface BorrowSummaryResponse {
+  data: IBorrowSummary[];
+  message?: string;
+  status?: string;
+}
+
 const BorrowSummary = () => {
   const { data, isLoading, isError } = useGetBorrowSummaryQuery();
+
+  // tell TS that data is BorrowSummaryResponse | undefined
+  const borrowList = (data as BorrowSummaryResponse | undefined)?.data ?? [];
 
   if (isLoading)
     return (
@@ -39,11 +56,10 @@ const BorrowSummary = () => {
             </tr>
           </thead>
           <tbody>
-            {data?.data.map((item, idx) => (
+            {borrowList.map((item, idx) => (
               <tr
                 key={idx}
-                className={idx % 2 === 0 ? "bg-white" : "bg-gray-50"}
-              >
+                className={idx % 2 === 0 ? "bg-white" : "bg-gray-50"}>
                 <td className="py-3 px-6 text-sm text-gray-800">{item.book.title}</td>
                 <td className="py-3 px-6 text-sm text-gray-800">{item.book.isbn}</td>
                 <td className="py-3 px-6 text-sm text-gray-800">{item.totalQuantity}</td>
